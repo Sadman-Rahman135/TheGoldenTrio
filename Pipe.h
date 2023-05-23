@@ -1,16 +1,16 @@
 #pragma once
-#include<SFML/Graphics.hpp>
+#include "stdafx.h"
+
 class Pipe
 {
 public:
 	Pipe(int);
-	sf::Sprite sprite_up, sprite_down;
+	sf::Sprite sprite_up;
 	static void loadTextures();
 	void update(sf::Time&);
 	float getRightBound();
 
 private:
-	static sf::Texture texture_down, texture_up;
+	static sf::Texture texture_up;
 	static int pipe_distance, move_speed;
-};
-
+}; 

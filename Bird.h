@@ -1,5 +1,6 @@
 #pragma once
-#include<SFML/Graphics.hpp>
+#include "stdafx.h"
+
 class Bird
 {
 private:
@@ -9,6 +10,7 @@ private:
 	float velocity_y;
 	int anim_counter, texture_switch;
 	bool should_fly;
+
 public:
 	sf::Sprite bird_sprite;
 	Bird();
@@ -17,5 +19,4 @@ public:
 	void resetBirdPosition();
 	void update(sf::Time&);
 	float getRightBound();
-
 };

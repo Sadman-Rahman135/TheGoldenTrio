@@ -1,23 +1,26 @@
 #include "Bird.h"
 #include "Globals.h"
-Bird::Bird():
-	gravity(10),
+#include "stdafx.h"
+
+Bird::Bird() :
+	gravity(11),
 	flap_speed(250),
 	anim_counter(0),
 	texture_switch(1),
 	should_fly(false)
 {
-	textures[0].loadFromFile("assets/harry_1.png");
-	textures[1].loadFromFile("assets/harry_2.png");
+	textures[0].loadFromFile("Graphics/harry_1.png");
+	textures[1].loadFromFile("Graphics/harry_2.png");
 
 	bird_sprite.setTexture(textures[0]);
-	bird_sprite.setScale(SCALE_FACTOR, SCALE_FACTOR);
+	bird_sprite.setScale(2, 2);
+	bird_sprite.rotate(-20.f);
 	resetBirdPosition();
 }
 
 void Bird::update(sf::Time& dt)
 {
-	if (bird_sprite.getGlobalBounds().top < 548 && should_fly)
+	if (bird_sprite.getGlobalBounds().top < (700 - bird_sprite.getGlobalBounds().height) && should_fly)
 	{
 		if (anim_counter == 5)
 		{
@@ -32,14 +35,15 @@ void Bird::update(sf::Time& dt)
 		velocity_y += gravity * dt.asSeconds();
 		bird_sprite.move(0, velocity_y);
 
-		if (bird_sprite.getGlobalBounds().top < 0)
+		/*if (bird_sprite.getGlobalBounds().top < 0)
 		{
 			bird_sprite.setPosition(100, 0);
-		}
+		}*/
+
 	}
 }
 
-void Bird::flapBird(sf::Time& dt) 
+void Bird::flapBird(sf::Time& dt)
 {
 	velocity_y = -flap_speed * dt.asSeconds();
 }
@@ -51,11 +55,11 @@ float Bird::getRightBound()
 
 void Bird::resetBirdPosition()
 {
-	bird_sprite.setPosition(100, 50);
+	bird_sprite.setPosition(100, 200);
 	velocity_y = 0;
 }
 
-void Bird ::setShouldFly(bool should_fly)
+void Bird::setShouldFly(bool should_fly)
 {
 	this->should_fly = should_fly;
 }
